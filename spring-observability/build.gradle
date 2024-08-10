@@ -30,8 +30,8 @@ dependencies {
 
 publishing {
     publications {
-        library(MavenPublication) {
-            from components.java // This represents the Java component of your app
+        mavenJava(MavenPublication) {
+            from components.java
         }
     }
 }
