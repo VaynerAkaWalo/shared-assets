@@ -1,1 +1,3 @@
 rootProject.name = 'shared-assets'
+include 'hello-world'
+

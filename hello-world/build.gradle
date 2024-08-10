@@ -1,0 +1,25 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.3.2'
+    id 'maven-publish'
+}
+
+group = 'com.vaynerakawalo'
+version = '0.0.1'
+
+dependencies {
+    implementation platform('org.springframework.boot:spring-boot-dependencies:3.3.2')
+    annotationProcessor platform('org.springframework.boot:spring-boot-dependencies:3.3.2')
+
+    implementation 'org.springframework.boot:spring-boot-starter'
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java // This represents the Java component of your app
+        }
+    }
+}
