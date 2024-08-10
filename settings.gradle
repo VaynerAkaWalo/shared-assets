@@ -1,3 +1,4 @@
 rootProject.name = 'shared-assets'
 include 'hello-world'
+include 'spring-observability'
 
