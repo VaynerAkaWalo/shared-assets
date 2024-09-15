@@ -1,11 +1,10 @@
 package com.vaynerakawalo.springobservability.logging;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.apache.logging.log4j.message.MapMessage;
 
 import java.time.Clock;
 import java.util.Map;
@@ -19,11 +18,11 @@ public class WebRequestLogger {
     private static final String REQUEST_TIME = "requestTime";
     private static final String RESPONSE_CODE = "statusCode";
     private static final String ERROR = "error";
+    private static final String QUERY_PARAMS = "query_params";
 
-    private final ObjectMapper objectMapper;
     private final Clock clock;
 
-    public void logCompletedRequest(HttpServletRequest request, HttpServletResponse response, Exception ex) throws JsonProcessingException {
+    public void logCompletedRequest(HttpServletRequest request, HttpServletResponse response, Exception ex) {
         logRequest(prepareCompletedRequestLog(request, response, ex));
     }
 
@@ -33,12 +32,13 @@ public class WebRequestLogger {
                 REQUEST_TIME, getRequestTime(),
                 RESPONSE_CODE, response.getStatus(),
                 ERROR, getError(ex),
-                TRACE_KEY, ThreadContextProperty.getValue(ThreadContextProperty.TRACE)
+                TRACE_KEY, ThreadContextProperty.getValue(ThreadContextProperty.TRACE),
+                QUERY_PARAMS, request.getParameterMap()
         );
     }
 
-    private void logRequest(Map<String, Object> toBeLogged) throws JsonProcessingException {
-        log.info(objectMapper.writeValueAsString(toBeLogged));
+    private void logRequest(Map<String, Object> toBeLogged) {
+        log.info(new MapMessage<>(toBeLogged));
     }
 
     private String getRequestPath(HttpServletRequest request) {
