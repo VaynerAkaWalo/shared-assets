@@ -27,19 +27,13 @@ public class ObservabilityAutoConfiguration implements WebMvcConfigurer {
 
     @Bean
     @ConditionalOnMissingBean
-    ObjectMapper objectMapper() {
-        return new ObjectMapper();
-    }
-
-    @Bean
-    @ConditionalOnMissingBean
-    WebRequestLogger webRequestLogger(ObjectMapper objectMapper, Clock clock) {
-        return new WebRequestLogger(objectMapper, clock);
+    WebRequestLogger webRequestLogger(Clock clock) {
+        return new WebRequestLogger(clock);
     }
 
     @Bean
     @ConditionalOnMissingBean
     WebRequestInterceptor webRequestInterceptor() {
-        return new WebRequestInterceptor(webRequestLogger(objectMapper(), clock()), clock());
+        return new WebRequestInterceptor(webRequestLogger(clock()), clock());
     }
 }
