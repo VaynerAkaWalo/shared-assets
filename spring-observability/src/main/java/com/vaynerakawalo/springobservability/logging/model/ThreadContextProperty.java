@@ -25,12 +25,24 @@ public enum ThreadContextProperty {
         this.unknownIfNull = skipIfNull;
     }
 
-    public String getString() {
-        var value = ThreadContext.get(displayName);
+    public String getValue() {
+        var value = ThreadContext.get(name());
         if (value != null) {
             return value;
         }
 
         return unknownIfNull ? UNKNOWN : EMPTY;
+    }
+
+    public void putString(String value) {
+        ThreadContext.put(name(), value);
+    }
+
+    public void putInteger(Integer value) {
+        ThreadContext.put(name(), String.valueOf(value));
+    }
+
+    public void putLong(Long value) {
+        ThreadContext.put(name(), String.valueOf(value));
     }
 }

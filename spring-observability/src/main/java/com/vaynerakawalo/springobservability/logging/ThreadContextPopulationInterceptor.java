@@ -28,25 +28,25 @@ public class ThreadContextPopulationInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         var trace = setTraceIfAbsent(request, response);
 
-        ThreadContextUtils.put(ThreadContextProperty.TYPE, Type.INGRESS.name());
-        ThreadContextUtils.put(ThreadContextProperty.TRACE, trace);
-        ThreadContextUtils.put(ThreadContextProperty.START_TIME, clock.millis());
+        ThreadContextProperty.TYPE.putString(Type.INGRESS.name());
+        ThreadContextProperty.TRACE.putString(trace);
+        ThreadContextProperty.START_TIME.putLong(clock.millis());
         return true;
     }
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
         try {
-            ThreadContextUtils.put(ThreadContextProperty.STATUS_CODE, response.getStatus());
+            ThreadContextProperty.STATUS_CODE.putInteger(response.getStatus());
             var totalDuration = Duration.between(getStartTime(), clock.instant());
-            ThreadContextUtils.put(ThreadContextProperty.TOTAL_DURATION, totalDuration.toMillis());
+            ThreadContextProperty.TOTAL_DURATION.putLong(totalDuration.toMillis());
             if (ex != null) {
-                ThreadContextUtils.put(ThreadContextProperty.OUTCOME, Outcome.ERROR.name());
-                ThreadContextUtils.put(ThreadContextProperty.ERROR, ex.getClass().getSimpleName());
+                ThreadContextProperty.OUTCOME.putString(Outcome.ERROR.name());
+                ThreadContextProperty.ERROR.putString(ex.getClass().getSimpleName());
                 var rootCause = ExceptionUtils.getRootCause(ex);
-                ThreadContextUtils.put(ThreadContextProperty.CAUSE, rootCause.getClass().getSimpleName());
+                ThreadContextProperty.CAUSE.putString(rootCause.getClass().getSimpleName());
             } else {
-                ThreadContextUtils.put(ThreadContextProperty.OUTCOME, Outcome.SUCCESS.name());
+                ThreadContextProperty.OUTCOME.putString(Outcome.SUCCESS.name());
             }
         } finally {
             new BaseLog().log();
@@ -65,7 +65,7 @@ public class ThreadContextPopulationInterceptor implements HandlerInterceptor {
     }
 
     private Instant getStartTime() {
-        return Instant.ofEpochMilli(Long.parseLong(ThreadContextUtils.get(ThreadContextProperty.START_TIME)));
+        return Instant.ofEpochMilli(Long.parseLong(ThreadContextProperty.START_TIME.getValue()));
     }
 
     protected String generateUUID() {

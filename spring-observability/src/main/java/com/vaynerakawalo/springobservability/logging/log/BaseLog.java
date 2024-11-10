@@ -30,20 +30,20 @@ public class BaseLog {
     }
 
     protected void putProperty(ThreadContextProperty property) {
-        if (StringUtils.isEmpty(property.getString())) {
+        if (StringUtils.isEmpty(property.getValue())) {
             return;
         }
 
-        logMap.put(property.getDisplayName(), property.getString());
+        logMap.put(property.getDisplayName(), property.getValue());
     }
 
     protected void nestPropertyIn(String parent, ThreadContextProperty child) {
-        if (StringUtils.isEmpty(child.getString())) {
+        if (StringUtils.isEmpty(child.getValue())) {
             return;
         }
 
         var parentMap = getPropertyMap(parent);
-        parentMap.put(child.getDisplayName(), child.getString());
+        parentMap.put(child.getDisplayName(), child.getValue());
     }
 
     private Map<String, Object> getPropertyMap(String mapName) {
