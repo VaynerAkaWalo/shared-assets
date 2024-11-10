@@ -65,7 +65,7 @@ public class ThreadContextPopulationInterceptor implements HandlerInterceptor {
     }
 
     private Instant getStartTime() {
-        return Instant.ofEpochMilli(Long.parseLong(ThreadContextProperty.START_TIME.getValue()));
+        return Instant.ofEpochMilli(ThreadContextProperty.START_TIME.getNumericValue());
     }
 
     protected String generateUUID() {

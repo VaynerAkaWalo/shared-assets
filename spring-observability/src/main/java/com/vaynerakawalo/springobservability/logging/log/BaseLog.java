@@ -21,11 +21,11 @@ public class BaseLog {
         this.logMap = new HashMap<>();
 
         putProperty(ThreadContextProperty.TYPE);
-        nestPropertyIn(METRICS, ThreadContextProperty.TOTAL_DURATION);
+        nestNumericPropertyIn(METRICS, ThreadContextProperty.TOTAL_DURATION);
         nestPropertyIn(RESULT, ThreadContextProperty.OUTCOME);
         nestPropertyIn(RESULT, ThreadContextProperty.CAUSE);
         nestPropertyIn(RESULT, ThreadContextProperty.ERROR);
-        nestPropertyIn(RESULT, ThreadContextProperty.STATUS_CODE);
+        nestNumericPropertyIn(RESULT, ThreadContextProperty.STATUS_CODE);
         nestPropertyIn(TRACING, ThreadContextProperty.TRACE);
     }
 
@@ -44,6 +44,17 @@ public class BaseLog {
 
         var parentMap = getPropertyMap(parent);
         parentMap.put(child.getDisplayName(), child.getValue());
+    }
+
+    protected void nestNumericPropertyIn(String parent, ThreadContextProperty child) {
+        var value = child.getNumericValue();
+
+        if (value == null) {
+            return;
+        }
+
+        var parentMap = getPropertyMap(parent);
+        parentMap.put(child.getDisplayName(), value);
     }
 
     private Map<String, Object> getPropertyMap(String mapName) {
