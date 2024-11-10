@@ -48,8 +48,6 @@ public class ThreadContextPopulationInterceptor implements HandlerInterceptor {
             } else {
                 ThreadContextUtils.put(ThreadContextProperty.OUTCOME, Outcome.SUCCESS.name());
             }
-        } catch (Exception exc) {
-            log.error(exc);
         } finally {
             new BaseLog().log();
             ThreadContext.clearAll();

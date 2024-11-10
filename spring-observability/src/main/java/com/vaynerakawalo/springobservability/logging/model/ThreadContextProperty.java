@@ -1,5 +1,6 @@
 package com.vaynerakawalo.springobservability.logging.model;
 
+import lombok.Getter;
 import org.apache.logging.log4j.ThreadContext;
 
 public enum ThreadContextProperty {
@@ -14,16 +15,18 @@ public enum ThreadContextProperty {
 
     private static final String UNKNOWN = "unknown";
     private static final String EMPTY = "";
-    private final String name;
+
+    @Getter
+    private final String displayName;
     private final boolean unknownIfNull;
 
     ThreadContextProperty(String name, boolean skipIfNull) {
-        this.name = name;
+        this.displayName = name;
         this.unknownIfNull = skipIfNull;
     }
 
     public String getString() {
-        var value = ThreadContext.get(name);
+        var value = ThreadContext.get(displayName);
         if (value != null) {
             return value;
         }
