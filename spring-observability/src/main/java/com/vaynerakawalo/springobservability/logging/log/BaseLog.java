@@ -3,6 +3,7 @@ package com.vaynerakawalo.springobservability.logging.log;
 import com.vaynerakawalo.springobservability.logging.model.ThreadContextProperty;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.logging.log4j.ThreadContext;
 import org.apache.logging.log4j.message.MapMessage;
 
 import java.util.HashMap;
@@ -19,7 +20,7 @@ public class BaseLog {
 
     public BaseLog() {
         this.logMap = new HashMap<>();
-
+        logMap.put(CONTEXT, ThreadContext.getContext());
         putProperty(ThreadContextProperty.TYPE);
         nestNumericPropertyIn(METRICS, ThreadContextProperty.TOTAL_DURATION);
         nestPropertyIn(RESULT, ThreadContextProperty.OUTCOME);
