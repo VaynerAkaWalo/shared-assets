@@ -1,12 +1,14 @@
 package com.vaynerakawalo.springobservability.logging.log;
 
 import com.vaynerakawalo.springobservability.logging.model.ThreadContextProperty;
+import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.message.MapMessage;
 
 import java.util.HashMap;
 import java.util.Map;
 
+@Log4j2
 public class BaseLog {
     protected static final String CONTEXT = "context";
     protected static final String METRICS = "metrics";
@@ -50,7 +52,7 @@ public class BaseLog {
         return (Map<String, Object>) logMap.get(mapName);
     }
 
-    public MapMessage mapMessage() {
-        return new MapMessage(logMap);
+    public void log() {
+        log.info(new MapMessage<>(logMap));
     }
 }

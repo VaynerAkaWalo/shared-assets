@@ -37,7 +37,7 @@ public class ThreadContextPopulationInterceptor implements HandlerInterceptor {
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
         try {
-            ThreadContextUtils.put(ThreadContextProperty.STATUS_CODE , response.getStatus());
+            ThreadContextUtils.put(ThreadContextProperty.STATUS_CODE, response.getStatus());
             var totalDuration = Duration.between(getStartTime(), clock.instant());
             ThreadContextUtils.put(ThreadContextProperty.TOTAL_DURATION, totalDuration.toMillis());
             if (ex != null) {
@@ -48,8 +48,10 @@ public class ThreadContextPopulationInterceptor implements HandlerInterceptor {
             } else {
                 ThreadContextUtils.put(ThreadContextProperty.OUTCOME, Outcome.SUCCESS.name());
             }
+        } catch (Exception exc) {
+            log.error(exc);
         } finally {
-            log.info(new BaseLog().mapMessage());
+            new BaseLog().log();
             ThreadContext.clearAll();
         }
     }
