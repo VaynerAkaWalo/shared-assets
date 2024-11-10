@@ -1,0 +1,20 @@
+{
+    "type": "Ingress",
+    "context": {
+
+    },
+    "metrics": {
+        "total_duration": 2000
+    },
+    "level": "INFO",
+    "thread_name": "http5",
+    "result": {
+        "outcome": "Success"
+    },
+    "tracing": {
+        "trace_id": "jfaklfjdlkasfoiwerqoiurewqohjcdalcjs"
+    },
+    "authority": {
+        "user_agent": "DIS"
+    }
+}
