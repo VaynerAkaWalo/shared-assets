@@ -34,6 +34,16 @@ public enum ThreadContextProperty {
         return unknownIfNull ? UNKNOWN : EMPTY;
     }
 
+    public Long getNumericValue() {
+        if (getValue() == null) {
+            return null;
+        }
+        return switch (this) {
+            case START_TIME, TOTAL_DURATION -> Long.parseLong(getValue());
+            default -> 0L;
+        };
+    }
+
     public void putString(String value) {
         ThreadContext.put(name(), value);
     }
