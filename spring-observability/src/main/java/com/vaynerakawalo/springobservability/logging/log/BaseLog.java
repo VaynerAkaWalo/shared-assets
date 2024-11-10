@@ -34,7 +34,7 @@ public class BaseLog {
             return;
         }
 
-        logMap.put(property.name(), property.getString());
+        logMap.put(property.getDisplayName(), property.getString());
     }
 
     protected void nestPropertyIn(String parent, ThreadContextProperty child) {
@@ -43,7 +43,7 @@ public class BaseLog {
         }
 
         var parentMap = getPropertyMap(parent);
-        parentMap.put(child.name(), child.getString());
+        parentMap.put(child.getDisplayName(), child.getString());
     }
 
     private Map<String, Object> getPropertyMap(String mapName) {
