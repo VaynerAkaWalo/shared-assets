@@ -23,6 +23,7 @@ public class BasicOperationLog {
         nestPropertyIn(RESULT, ThreadContextProperty.OUTCOME);
         nestPropertyIn(RESULT, ThreadContextProperty.CAUSE);
         nestPropertyIn(RESULT, ThreadContextProperty.ERROR);
+        nestNumericPropertyIn(METRICS, ThreadContextProperty.TOTAL_DURATION);
         nestPropertyIn(TRACING, ThreadContextProperty.TRACE);
     }
 

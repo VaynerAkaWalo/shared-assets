@@ -12,7 +12,9 @@ public enum ThreadContextProperty {
     CAUSE("cause", false),
     ERROR("error", false),
     URL("url", false),
-    TRACE("trace_id", false);
+    TRACE("trace_id", false),
+    TARGET_SERVICE("service", false),
+    METHOD("method", false);
 
     private static final String UNKNOWN = "unknown";
     private static final String EMPTY = "";
