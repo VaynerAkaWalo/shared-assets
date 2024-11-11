@@ -1,6 +1,7 @@
 package com.vaynerakawalo.springobservability.logging;
 
-import com.vaynerakawalo.springobservability.logging.log.BaseLog;
+import com.vaynerakawalo.springobservability.logging.log.BasicOperationLog;
+import com.vaynerakawalo.springobservability.logging.log.IngressOperationLog;
 import com.vaynerakawalo.springobservability.logging.model.Outcome;
 import com.vaynerakawalo.springobservability.logging.model.ThreadContextProperty;
 import com.vaynerakawalo.springobservability.logging.model.Type;
@@ -28,7 +29,7 @@ public class ThreadContextPopulationInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         var trace = setTraceIfAbsent(request, response);
 
-        ThreadContextProperty.TYPE.putString(Type.INGRESS.name());
+        ThreadContextProperty.TYPE.putString(Type.INGRESS.getDisplayName());
         ThreadContextProperty.TRACE.putString(trace);
         ThreadContextProperty.START_TIME.putLong(clock.millis());
         return true;
@@ -49,7 +50,7 @@ public class ThreadContextPopulationInterceptor implements HandlerInterceptor {
                 ThreadContextProperty.OUTCOME.putString(Outcome.SUCCESS.name());
             }
         } finally {
-            new BaseLog().log();
+            new IngressOperationLog().log();
             ThreadContext.clearAll();
         }
     }

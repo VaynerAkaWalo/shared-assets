@@ -3,15 +3,13 @@ package com.vaynerakawalo.springobservability.logging.log;
 import com.vaynerakawalo.springobservability.logging.model.ThreadContextProperty;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.logging.log4j.ThreadContext;
 import org.apache.logging.log4j.message.MapMessage;
 
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 @Log4j2
-public class BaseLog {
+public class BasicOperationLog {
     protected static final String CONTEXT = "context";
     protected static final String METRICS = "metrics";
     protected static final String RESULT = "result";
@@ -19,14 +17,12 @@ public class BaseLog {
 
     private final Map<String, Object> logMap;
 
-    public BaseLog() {
+    public BasicOperationLog() {
         this.logMap = new HashMap<>();
         putProperty(ThreadContextProperty.TYPE);
-        nestNumericPropertyIn(METRICS, ThreadContextProperty.TOTAL_DURATION);
         nestPropertyIn(RESULT, ThreadContextProperty.OUTCOME);
         nestPropertyIn(RESULT, ThreadContextProperty.CAUSE);
         nestPropertyIn(RESULT, ThreadContextProperty.ERROR);
-        nestNumericPropertyIn(RESULT, ThreadContextProperty.STATUS_CODE);
         nestPropertyIn(TRACING, ThreadContextProperty.TRACE);
     }
 
