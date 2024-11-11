@@ -39,7 +39,7 @@ public enum ThreadContextProperty {
             return null;
         }
         return switch (this) {
-            case START_TIME, TOTAL_DURATION -> Long.parseLong(getValue());
+            case START_TIME, TOTAL_DURATION, STATUS_CODE -> Long.parseLong(getValue());
             default -> 0L;
         };
     }

@@ -20,7 +20,7 @@ public class BaseLog {
     private final Map<String, Object> logMap;
 
     public BaseLog() {
-        this.logMap = new LinkedHashMap<>();
+        this.logMap = new HashMap<>();
         putProperty(ThreadContextProperty.TYPE);
         nestNumericPropertyIn(METRICS, ThreadContextProperty.TOTAL_DURATION);
         nestPropertyIn(RESULT, ThreadContextProperty.OUTCOME);
