@@ -7,6 +7,7 @@ import org.apache.logging.log4j.ThreadContext;
 import org.apache.logging.log4j.message.MapMessage;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 @Log4j2
@@ -19,8 +20,7 @@ public class BaseLog {
     private final Map<String, Object> logMap;
 
     public BaseLog() {
-        this.logMap = new HashMap<>();
-        logMap.put(CONTEXT, ThreadContext.getContext());
+        this.logMap = new LinkedHashMap<>();
         putProperty(ThreadContextProperty.TYPE);
         nestNumericPropertyIn(METRICS, ThreadContextProperty.TOTAL_DURATION);
         nestPropertyIn(RESULT, ThreadContextProperty.OUTCOME);
