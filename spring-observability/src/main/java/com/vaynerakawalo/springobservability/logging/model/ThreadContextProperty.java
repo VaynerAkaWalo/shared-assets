@@ -11,6 +11,7 @@ public enum ThreadContextProperty {
     STATUS_CODE("status_code", false),
     CAUSE("cause", false),
     ERROR("error", false),
+    URL("url", false),
     TRACE("trace_id", false);
 
     private static final String UNKNOWN = "unknown";

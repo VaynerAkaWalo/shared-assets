@@ -32,6 +32,7 @@ public class ThreadContextPopulationInterceptor implements HandlerInterceptor {
         ThreadContextProperty.TYPE.putString(Type.INGRESS.getDisplayName());
         ThreadContextProperty.TRACE.putString(trace);
         ThreadContextProperty.START_TIME.putLong(clock.millis());
+        ThreadContextProperty.URL.putString(request.getRequestURI());
         return true;
     }
 
