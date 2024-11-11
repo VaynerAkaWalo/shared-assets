@@ -6,7 +6,7 @@ import java.lang.annotation.RetentionPolicy;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Egress {
 
-    String method();
+    String method() default "unknown";
 
-    String service();
+    String service() default "unknown";
 }

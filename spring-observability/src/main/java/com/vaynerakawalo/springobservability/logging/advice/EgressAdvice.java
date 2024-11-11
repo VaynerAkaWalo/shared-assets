@@ -1,6 +1,7 @@
 package com.vaynerakawalo.springobservability.logging.advice;
 
 import com.vaynerakawalo.springobservability.logging.annotation.Egress;
+import com.vaynerakawalo.springobservability.logging.log.EgressOperationLog;
 import com.vaynerakawalo.springobservability.logging.model.Outcome;
 import com.vaynerakawalo.springobservability.logging.model.ThreadContextProperty;
 import com.vaynerakawalo.springobservability.logging.model.Type;
@@ -42,6 +43,7 @@ public class EgressAdvice {
             throw t;
         } finally {
             ThreadContextProperty.TOTAL_DURATION.putLong(clock.millis() - startTime);
+            new EgressOperationLog().log();
         }
     }
 
