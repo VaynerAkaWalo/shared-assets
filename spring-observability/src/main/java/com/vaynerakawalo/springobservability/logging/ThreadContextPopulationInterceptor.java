@@ -1,6 +1,5 @@
 package com.vaynerakawalo.springobservability.logging;
 
-import com.vaynerakawalo.springobservability.logging.log.BasicOperationLog;
 import com.vaynerakawalo.springobservability.logging.log.IngressOperationLog;
 import com.vaynerakawalo.springobservability.logging.model.Outcome;
 import com.vaynerakawalo.springobservability.logging.model.ThreadContextProperty;
