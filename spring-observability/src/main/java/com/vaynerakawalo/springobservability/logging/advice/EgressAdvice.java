@@ -12,18 +12,17 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
-import org.springframework.stereotype.Component;
 
 import java.time.Clock;
 
 @Aspect
-@Component
 @RequiredArgsConstructor
 public class EgressAdvice {
 
-    private final Clock clock;
+    private final Clock clock = Clock.systemUTC();
 
-    @Around("@annotation(com.vaynerakawalo.springobservability.logging.annotation.Egress)")
+    @Around("execution(@com.vaynerakawalo.springobservability.logging.annotation.Egress * *.*(..)) " +
+            "&& @annotation(com.vaynerakawalo.springobservability.logging.annotation.Egress)")
     public Object egressCall(ProceedingJoinPoint jp) throws Throwable {
         var startTime = clock.millis();
         try {

@@ -8,9 +8,6 @@ plugins {
 group = 'com.vaynerakawalo'
 
 configurations {
-    compileOnly {
-        extendsFrom annotationProcessor
-    }
     all*.exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
     all*.exclude group: 'ch.qos.logback', module: 'logback-classic'
     all*.exclude group: 'ch.qos.logback', module: 'logback-core'
