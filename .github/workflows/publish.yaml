@@ -1,7 +1,9 @@
 name: Publish package to GitHub Packages
 on:
   push:
-    branches: [ "main" "**-dev"]
+    branches:
+      - 'main'
+      - '**-dev'
 
 
 jobs:
