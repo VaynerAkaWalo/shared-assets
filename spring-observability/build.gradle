@@ -3,7 +3,6 @@ plugins {
     id 'org.springframework.boot' version '3.3.2'
     id 'io.spring.dependency-management' version '1.1.6'
     id 'maven-publish'
-    id('io.freefair.aspectj') version '8.10.2'
 }
 
 group = 'com.vaynerakawalo'
@@ -26,9 +25,6 @@ dependencies {
     implementation 'com.fasterxml.jackson.core:jackson-core'
     implementation 'com.fasterxml.jackson.core:jackson-databind'
     implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml'
-
-    implementation('org.aspectj:aspectjtools:1.9.22.1')
-    implementation("org.aspectj:aspectjrt:1.9.22.1")
 }
 
 publishing {
