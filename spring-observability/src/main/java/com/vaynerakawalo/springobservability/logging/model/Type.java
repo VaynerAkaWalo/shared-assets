@@ -1,8 +1,6 @@
 package com.vaynerakawalo.springobservability.logging.model;
 
-import lombok.Getter;
 
-@Getter
 public enum Type {
     INGRESS("Ingress"),
     EGRESS("Egress");
@@ -10,5 +8,9 @@ public enum Type {
     private final String displayName;
     Type(String name) {
         this.displayName = name;
+    }
+
+    public String getDisplayName() {
+        return displayName;
     }
 }

@@ -11,7 +11,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import java.time.Clock;
 
 @Configuration
-@EnableAspectJAutoProxy(proxyTargetClass = true)
 public class ObservabilityAutoConfiguration implements WebMvcConfigurer {
 
     @Override

@@ -5,7 +5,6 @@ import com.vaynerakawalo.springobservability.logging.log.EgressOperationLog;
 import com.vaynerakawalo.springobservability.logging.model.Outcome;
 import com.vaynerakawalo.springobservability.logging.model.ThreadContextProperty;
 import com.vaynerakawalo.springobservability.logging.model.Type;
-import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -16,7 +15,6 @@ import org.aspectj.lang.reflect.MethodSignature;
 import java.time.Clock;
 
 @Aspect
-@RequiredArgsConstructor
 public class EgressAdvice {
 
     private final Clock clock = Clock.systemUTC();

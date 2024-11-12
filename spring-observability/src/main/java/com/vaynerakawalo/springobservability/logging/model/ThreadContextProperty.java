@@ -19,13 +19,16 @@ public enum ThreadContextProperty {
     private static final String UNKNOWN = "unknown";
     private static final String EMPTY = "";
 
-    @Getter
     private final String displayName;
     private final boolean unknownIfNull;
 
     ThreadContextProperty(String name, boolean skipIfNull) {
         this.displayName = name;
         this.unknownIfNull = skipIfNull;
+    }
+
+    public String getDisplayName() {
+        return displayName;
     }
 
     public String getValue() {

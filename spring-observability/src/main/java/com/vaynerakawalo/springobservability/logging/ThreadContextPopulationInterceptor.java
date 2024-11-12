@@ -19,10 +19,13 @@ import java.time.Instant;
 import java.util.UUID;
 
 @Log4j2
-@RequiredArgsConstructor
 public class ThreadContextPopulationInterceptor implements HandlerInterceptor {
     private static final String TRACE_HEADER = "X-TRACE-ID";
     private final Clock clock;
+
+    public ThreadContextPopulationInterceptor(Clock clock) {
+        this.clock = clock;
+    }
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
