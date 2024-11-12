@@ -1,6 +1,6 @@
 allprojects {
     group = 'com.vaynerakawalo'
-    version = '1.0.0-dev3'
+    version = '1.0.0-dev4'
 
     repositories {
         mavenCentral()
