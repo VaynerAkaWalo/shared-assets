@@ -5,29 +5,25 @@ import com.vaynerakawalo.springobservability.logging.log.EgressOperationLog;
 import com.vaynerakawalo.springobservability.logging.model.Outcome;
 import com.vaynerakawalo.springobservability.logging.model.ThreadContextProperty;
 import com.vaynerakawalo.springobservability.logging.model.Type;
-import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
-import org.springframework.stereotype.Component;
 
 import java.time.Clock;
 
 @Aspect
-@Component
-@RequiredArgsConstructor
 public class EgressAdvice {
 
-    private final Clock clock;
+    private final Clock clock = Clock.systemUTC();
 
-    @Around("@annotation(com.vaynerakawalo.springobservability.logging.annotation.Egress)")
+    @Around("@annotation(com.vaynerakawalo.springobservability.logging.annotation.Egress) && execution(* *(..))")
     public Object egressCall(ProceedingJoinPoint jp) throws Throwable {
         var startTime = clock.millis();
         try {
-            ThreadContextProperty.TYPE.putString(Type.INGRESS.getDisplayName());
+            ThreadContextProperty.TYPE.putString(Type.EGRESS.getDisplayName());
             ThreadContextProperty.METHOD.putString(getMethod(jp));
             ThreadContextProperty.TARGET_SERVICE.putString(getService(jp));
 

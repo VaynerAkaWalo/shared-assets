@@ -1,8 +1,6 @@
 package com.vaynerakawalo.springobservability.logging.model;
 
-import lombok.Getter;
 
-@Getter
 public enum Outcome {
     SUCCESS("Success"),
     ERROR("Error");
@@ -11,5 +9,9 @@ public enum Outcome {
 
     Outcome(String name) {
         this.displayName = name;
+    }
+
+    public String getDisplayName() {
+        return displayName;
     }
 }

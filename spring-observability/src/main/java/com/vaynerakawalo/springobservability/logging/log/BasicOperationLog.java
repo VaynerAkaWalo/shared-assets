@@ -1,14 +1,15 @@
 package com.vaynerakawalo.springobservability.logging.log;
 
 import com.vaynerakawalo.springobservability.logging.model.ThreadContextProperty;
-import lombok.extern.log4j.Log4j2;
+import com.vaynerakawalo.springobservability.logging.model.Type;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.message.MapMessage;
 
 import java.util.HashMap;
 import java.util.Map;
 
-@Log4j2
 public class BasicOperationLog {
     protected static final String CONTEXT = "context";
     protected static final String METRICS = "metrics";
@@ -16,10 +17,11 @@ public class BasicOperationLog {
     protected static final String TRACING = "tracing";
 
     private final Map<String, Object> logMap;
+    private final Logger log = LogManager.getLogger(this.getClass().getSimpleName());
 
     public BasicOperationLog() {
         this.logMap = new HashMap<>();
-        putProperty(ThreadContextProperty.TYPE);
+        logMap.put(ThreadContextProperty.TYPE.getDisplayName(), getType());
         nestPropertyIn(RESULT, ThreadContextProperty.OUTCOME);
         nestPropertyIn(RESULT, ThreadContextProperty.CAUSE);
         nestPropertyIn(RESULT, ThreadContextProperty.ERROR);
@@ -63,5 +65,9 @@ public class BasicOperationLog {
 
     public void log() {
         log.info(new MapMessage<>(logMap));
+    }
+
+    protected Type getType() {
+        return Type.UNKNOWN;
     }
 }
