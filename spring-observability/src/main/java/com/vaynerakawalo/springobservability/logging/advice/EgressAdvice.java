@@ -19,8 +19,7 @@ public class EgressAdvice {
 
     private final Clock clock = Clock.systemUTC();
 
-    @Around("execution(@com.vaynerakawalo.springobservability.logging.annotation.Egress * *.*(..)) " +
-            "&& @annotation(com.vaynerakawalo.springobservability.logging.annotation.Egress)")
+    @Around("@annotation(com.vaynerakawalo.springobservability.logging.annotation.Egress)")
     public Object egressCall(ProceedingJoinPoint jp) throws Throwable {
         var startTime = clock.millis();
         try {
