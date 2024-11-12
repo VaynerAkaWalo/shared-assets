@@ -6,8 +6,6 @@ import com.vaynerakawalo.springobservability.logging.model.ThreadContextProperty
 import com.vaynerakawalo.springobservability.logging.model.Type;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.logging.log4j.ThreadContext;
@@ -18,7 +16,6 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.UUID;
 
-@Log4j2
 public class ThreadContextPopulationInterceptor implements HandlerInterceptor {
     private static final String TRACE_HEADER = "X-TRACE-ID";
     private final Clock clock;

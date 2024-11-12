@@ -1,6 +1,5 @@
 package com.vaynerakawalo.springobservability.logging.model;
 
-import lombok.Getter;
 import org.apache.logging.log4j.ThreadContext;
 
 public enum ThreadContextProperty {
