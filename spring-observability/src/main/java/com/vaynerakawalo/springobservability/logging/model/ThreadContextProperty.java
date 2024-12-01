@@ -1,6 +1,6 @@
 package com.vaynerakawalo.springobservability.logging.model;
 
-import lombok.Getter;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.ThreadContext;
 
 public enum ThreadContextProperty {
@@ -12,6 +12,7 @@ public enum ThreadContextProperty {
     CAUSE("cause", false),
     ERROR("error", false),
     URL("url", false),
+    TARGET_URL("target_url", false),
     TRACE("trace_id", false),
     TARGET_SERVICE("service", false),
     METHOD("method", false);
@@ -19,13 +20,16 @@ public enum ThreadContextProperty {
     private static final String UNKNOWN = "unknown";
     private static final String EMPTY = "";
 
-    @Getter
     private final String displayName;
     private final boolean unknownIfNull;
 
     ThreadContextProperty(String name, boolean skipIfNull) {
         this.displayName = name;
         this.unknownIfNull = skipIfNull;
+    }
+
+    public String getDisplayName() {
+        return displayName;
     }
 
     public String getValue() {
@@ -38,7 +42,7 @@ public enum ThreadContextProperty {
     }
 
     public Long getNumericValue() {
-        if (getValue() == null) {
+        if (!StringUtils.isNumeric(getValue())) {
             return null;
         }
         return switch (this) {

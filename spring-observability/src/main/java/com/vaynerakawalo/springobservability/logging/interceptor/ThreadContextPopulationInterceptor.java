@@ -1,14 +1,11 @@
-package com.vaynerakawalo.springobservability.logging;
+package com.vaynerakawalo.springobservability.logging.interceptor;
 
-import com.vaynerakawalo.springobservability.logging.log.BasicOperationLog;
 import com.vaynerakawalo.springobservability.logging.log.IngressOperationLog;
 import com.vaynerakawalo.springobservability.logging.model.Outcome;
 import com.vaynerakawalo.springobservability.logging.model.ThreadContextProperty;
 import com.vaynerakawalo.springobservability.logging.model.Type;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.logging.log4j.ThreadContext;
@@ -19,11 +16,13 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.UUID;
 
-@Log4j2
-@RequiredArgsConstructor
 public class ThreadContextPopulationInterceptor implements HandlerInterceptor {
     private static final String TRACE_HEADER = "X-TRACE-ID";
     private final Clock clock;
+
+    public ThreadContextPopulationInterceptor(Clock clock) {
+        this.clock = clock;
+    }
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {

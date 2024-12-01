@@ -1,14 +1,17 @@
 package com.vaynerakawalo.springobservability.logging.model;
 
-import lombok.Getter;
 
-@Getter
 public enum Type {
+    UNKNOWN("Unknown"),
     INGRESS("Ingress"),
     EGRESS("Egress");
 
     private final String displayName;
     Type(String name) {
         this.displayName = name;
+    }
+
+    public String getDisplayName() {
+        return displayName;
     }
 }
