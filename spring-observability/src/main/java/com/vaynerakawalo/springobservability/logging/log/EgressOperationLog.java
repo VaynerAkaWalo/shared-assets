@@ -11,6 +11,7 @@ public class EgressOperationLog extends BasicOperationLog {
         nestNumericPropertyIn(RESULT, ThreadContextProperty.STATUS_CODE);
         nestPropertyIn(TARGET, ThreadContextProperty.TARGET_SERVICE);
         nestPropertyIn(TARGET, ThreadContextProperty.TARGET_URL);
+        nestPropertyIn(TARGET, ThreadContextProperty.METHOD);
     }
 
     @Override

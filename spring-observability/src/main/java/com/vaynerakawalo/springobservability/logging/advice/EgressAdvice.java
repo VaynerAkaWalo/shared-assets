@@ -48,7 +48,7 @@ public class EgressAdvice {
         var clazz = signature.getDeclaringType();
         var annotation = clazz.getAnnotation(Egress.class);
 
-        if (annotation == null || StringUtils.isEmpty(((Egress) annotation).service())) {
+        if (annotation == null || StringUtils.equalsIgnoreCase(((Egress) annotation).service(), Egress.NOT_SET)) {
             return clazz.getSimpleName();
         }
 
@@ -60,7 +60,7 @@ public class EgressAdvice {
         var method = signature.getMethod();
 
         var annotation = method.getAnnotation(Egress.class);
-        if (annotation == null) {
+        if (annotation == null || StringUtils.equalsIgnoreCase(annotation.method(), Egress.NOT_SET)) {
             return method.getName();
         }
         return annotation.method();
