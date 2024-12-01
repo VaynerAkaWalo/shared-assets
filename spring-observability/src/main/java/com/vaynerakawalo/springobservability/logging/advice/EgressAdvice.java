@@ -40,6 +40,10 @@ public class EgressAdvice {
         } finally {
             ThreadContextProperty.TOTAL_DURATION.putLong(clock.millis() - startTime);
             new EgressOperationLog().log();
+
+            ThreadContextProperty.METHOD.putString(null);
+            ThreadContextProperty.TARGET_URL.putString(null);
+            ThreadContextProperty.TARGET_SERVICE.putString(null);
         }
     }
 
