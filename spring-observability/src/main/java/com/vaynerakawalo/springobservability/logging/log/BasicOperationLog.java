@@ -17,7 +17,7 @@ public class BasicOperationLog {
     protected static final String TRACING = "tracing";
 
     private final Map<String, Object> logMap;
-    private final Logger log = LogManager.getLogger(this.getClass().getSimpleName());
+    private final Logger log = LogManager.getLogger("OperationLogger");
 
     public BasicOperationLog() {
         this.logMap = new HashMap<>();
